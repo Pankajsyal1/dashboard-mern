@@ -62,10 +62,10 @@ function renderApp() {
     <div id="skills-root"></div>
   `;
 
-  loadStats();
-  loadProjects();
   loadActivity();
+  loadProjects();
   loadSkills();
+  loadStats();
 }
 
 document.addEventListener("DOMContentLoaded", renderApp);

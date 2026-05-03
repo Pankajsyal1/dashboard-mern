@@ -1,0 +1,13 @@
+{
+  "name": "dashboard-mern-vanilla",
+  "private": true,
+  "scripts": {
+    "dev": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\\start-all.ps1",
+    "dev:all": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "dev:backend": "cd backend && npm run start",
+    "dev:frontend": "concurrently \"cd container && npm run dev\" \"cd micro-activity && npm run dev\" \"cd micro-projects && npm run dev\" \"cd micro-skills && npm run dev\" \"cd micro-stats && npm run dev\""
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
