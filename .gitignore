@@ -6,7 +6,13 @@ node_modules/**
 dist/
 dist/**
 dist/**/*
+.dist/
+.dist/**
+.dist/**/*
 
 # Environment
 .env
 backend/.env
+
+# text files
+*.txt

@@ -10,7 +10,7 @@ module.exports = {
     historyApiFallback: true,
   },
   output: {
-    path: path.resolve(__dirname, "dist"),
+    path: path.resolve(__dirname, "..", ".dist", "container"),
     publicPath: "auto",
   },
   plugins: [
