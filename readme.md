@@ -11,6 +11,8 @@
 ### Backend:
 - Node.js + Express, MongoDB (via mongoose)
 
+---
+
 ## 2. Folder structure
 mkdir portfolio-dashboard
 cd portfolio-dashboard
@@ -23,8 +25,7 @@ dashboard-mern-vanilla/
 ├── micro-activity/     # micro‑frontend activity list
 └── backend/            # Node.js + Express + MongoDB
 ```
-
-
+---
 
 ## 3. Backend – Node.js + Express + MongoDB
 ```bash
@@ -124,6 +125,8 @@ app.listen(PORT, () => {
 
 This is a simple CRUD‑style backend for your dashboard.
 
+---
+
 ## 4. Micro‑frontend 1: micro-stats ↔ Node API
 Update micro-stats/src/StatsWidget.js to use Node + MongoDB:
 
@@ -166,11 +169,11 @@ export async function renderStatsWidget(containerEl) {
 ```
 Now micro-stats reads stats from MongoDB via Node API.
 
-5. Micro‑frontend 2: micro-activity (activity list)
+## 5. Micro‑frontend 2: micro-activity (activity list)
 Same pattern:
-
 micro-activity/webpack.config.js
-js
+
+```js
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { ModuleFederationPlugin } = require("webpack").container;
@@ -199,8 +202,10 @@ module.exports = {
     }),
   ],
 };
+```
+
 micro-activity/src/ActivityWidget.js
-js
+```js
 export async function renderActivityWidget(containerEl) {
   const API = "http://localhost:5000/api";
 
@@ -229,19 +234,18 @@ export async function renderActivityWidget(containerEl) {
     containerEl.innerHTML = "<div>Failed to load activity</div>";
   }
 }
+```
 You can later add a button to create an activity (POST /api/activities).
 
-6. container – Micro‑frontend dashboard shell
+## 6. container – Micro‑frontend dashboard shell
 Same structure as before, but now:
-
 container pulls:
-
 micro-stats@3001
-
 micro-activity@3002
 
 container/webpack.config.js (updated)
-js
+
+```js
 const { ModuleFederationPlugin } = require("webpack").container;
 
 module.exports = {
@@ -269,8 +273,10 @@ module.exports = {
     }),
   ],
 };
+```
+
 container/src/index.js
-js
+```js
 async function loadStats() {
   const module = await import("stats/StatsWidget");
   const { renderStatsWidget } = module;
@@ -297,50 +303,28 @@ function renderApp() {
 }
 
 document.addEventListener("DOMContentLoaded", renderApp);
+```
+
 Now you have:
 
-Frontend:
-
+### Frontend:
 container + micro-stats + micro-activity (micro‑frontends).
 
-Backend:
-
+### Backend:
 Node.js + Express + MongoDB (API + MongoDB models).
 
-7. Portfolio‑ready full‑stack micro‑frontend dashboard
+
+## 7. Portfolio‑ready full‑stack micro‑frontend dashboard
 You can now present this as:
 
 “Micro‑frontend dashboard with Node.js + Express + MongoDB backend, no framework on frontend.”
 
-Key features:
-
+### Key features:
 Each micro‑frontend talks to its own Node API endpoints.
-
 Module Federation wires them together in container.
 
-MongoDB stores:
-
-Stats
-
-Activity
+#### MongoDB stores:
+- Stats
+- Activity
 
 You can later add authentication, user‑specific data, or charts.
-
-8. Next: tell me what you want to do now
-Do you want me to write exact package.json files for container, micro-stats, micro-activity, and backend?
-
-Or do you want helicopter‑style step‑by‑step terminal commands (e.g., “copy these 8 commands and you’ll have a working project”)?
-
-Pick one and I’ll give you ready‑to‑paste scaffolding.
-
-Follow-ups
-
-How to add authentication JWT to Node Express Mongo backend
-
-Microfrontend integration with Express REST APIs examples
-
-Social Content Hub specific schema design in MongoDB
-
-Deploy Node Express Mongo app to production
-
-Handle real-time updates in Social Hub with Socket.io and Mongo Change Streams
