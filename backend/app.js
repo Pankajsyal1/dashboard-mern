@@ -5,15 +5,29 @@ const cors = require("cors");
 
 const app = express();
 
+const defaultOrigins = new Set([
+  "http://localhost:3000",
+  "http://localhost:3001",
+  "http://localhost:3002",
+  "http://localhost:3003",
+  "http://localhost:3004",
+]);
+
+const extraOrigins = (process.env.CORS_ORIGINS || "")
+  .split(",")
+  .map((s) => s.trim())
+  .filter(Boolean);
+
+for (const origin of extraOrigins) defaultOrigins.add(origin);
+
 app.use(
   cors({
-    origin: [
-      "http://localhost:3000",
-      "http://localhost:3001",
-      "http://localhost:3002",
-      "http://localhost:3003",
-      "http://localhost:3004",
-    ],
+    origin(origin, callback) {
+      if (!origin) return callback(null, true); // curl/postman
+      if (defaultOrigins.has(origin)) return callback(null, true);
+      if (/^https:\/\/.+\.vercel\.app$/.test(origin)) return callback(null, true);
+      return callback(new Error(`CORS blocked for origin: ${origin}`));
+    },
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
   })

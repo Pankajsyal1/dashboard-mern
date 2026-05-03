@@ -1,6 +1,10 @@
 // Track which remotes have been loaded
 const loadedRemotes = new Set();
 
+// Expose API base URL for all remotes at runtime.
+// `__API_BASE_URL__` is injected at build time by webpack DefinePlugin.
+globalThis.API_BASE_URL = globalThis.API_BASE_URL || __API_BASE_URL__;
+
 function renderError(el, text) {
   if (!el) return;
   el.innerHTML = `<div class="error">${text}</div>`;

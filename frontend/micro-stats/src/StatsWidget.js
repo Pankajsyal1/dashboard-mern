@@ -1,5 +1,5 @@
 export async function renderStatsWidget(containerEl) {
-  const API = "http://localhost:5000/api";
+  const API = globalThis.API_BASE_URL || "http://localhost:5000/api";
 
   try {
     const res = await fetch(`${API}/stats`);
