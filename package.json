@@ -4,7 +4,7 @@
   "scripts": {
     "dev:all": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
     "dev:backend": "cd backend && npm run start",
-    "dev:frontend": "concurrently \"cd frontend/container && npm run dev\" \"cd frontend/micro-activity && npm run dev\" \"cd frontend/micro-projects && npm run dev\" \"cd frontend/micro-skills && npm run dev\" \"cd frontend/micro-stats && npm run dev\""
+    "dev:frontend": "cd frontend && npm run dev"
   },
   "devDependencies": {
     "concurrently": "^8.2.2"

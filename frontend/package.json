@@ -1,0 +1,24 @@
+{
+  "name": "dashboard-frontend",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "container",
+    "micro-activity",
+    "micro-projects",
+    "micro-skills",
+    "micro-stats"
+  ],
+  "scripts": {
+    "dev": "concurrently \"cd container && npm run dev\" \"cd micro-activity && npm run dev\" \"cd micro-projects && npm run dev\" \"cd micro-skills && npm run dev\" \"cd micro-stats && npm run dev\"",
+    "build": "npm run build --workspaces",
+    "install:all": "npm install"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "html-webpack-plugin": "^5.6.7",
+    "webpack": "^5.106.2",
+    "webpack-cli": "^7.0.2",
+    "webpack-dev-server": "^5.2.3"
+  }
+}

@@ -3,11 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio Panel</title>
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="./styles.css">
 </head>
 
 <body>
-    <div id="app-main"></div>
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a class="navbar-brand" href="/">Dashboard</a>
+            <div class="nav-links">
+                <a href="/">Dashboard</a>
+                <a href="/stats">Stats</a>
+                <a href="/projects">Projects</a>
+                <a href="/activity">Activity</a>
+                <a href="/skills">Skills</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- Dashboard Page -->
+        <div id="page-home" class="page active">
+            <h1 class="page-title">Welcome to Dashboard</h1>
+            <p>Select a page from the navigation menu to view different sections.</p>
+        </div>
+
+        <!-- Stats Page -->
+        <div id="page-stats" class="page">
+            <h1 class="page-title">Statistics</h1>
+            <div id="stats-root"></div>
+        </div>
+
+        <!-- Projects Page -->
+        <div id="page-projects" class="page">
+            <h1 class="page-title">Projects</h1>
+            <div id="projects-root"></div>
+        </div>
+
+        <!-- Activity Page -->
+        <div id="page-activity" class="page">
+            <h1 class="page-title">Activity</h1>
+            <div id="activity-root"></div>
+        </div>
+
+        <!-- Skills Page -->
+        <div id="page-skills" class="page">
+            <h1 class="page-title">Skills</h1>
+            <div id="skills-root"></div>
+        </div>
+    </div>
 </body>
 
 </html>
