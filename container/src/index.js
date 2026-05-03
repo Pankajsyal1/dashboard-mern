@@ -1,40 +1,65 @@
+function renderError(el, text) {
+  if (!el) return;
+  el.innerHTML = `<div class="error">${text}</div>`;
+}
+
 async function loadActivity() {
-  const module = await import("activity/ActivityWidget");
-  const { renderActivityWidget } = module;
-  const el = document.getElementById("activity-root");
-  if (el) renderActivityWidget(el);
+  try {
+    const module = await import("activity/ActivityWidget");
+    const { renderActivityWidget } = module;
+    const el = document.getElementById("activity-root");
+    if (el) renderActivityWidget(el);
+  } catch (err) {
+    console.error("Failed to load activity remote:", err);
+    renderError(document.getElementById("activity-root"), "Activity failed to load.");
+  }
 }
 
 async function loadProjects() {
-  const module = await import("projects/ProjectsGrid");
-  const { renderProjectsGrid } = module;
-  const el = document.getElementById("projects-root");
-  if (el) renderProjectsGrid(el);
+  try {
+    const module = await import("projects/ProjectsGrid");
+    const { renderProjectsGrid } = module;
+    const el = document.getElementById("projects-root");
+    if (el) renderProjectsGrid(el);
+  } catch (err) {
+    console.error("Failed to load projects remote:", err);
+    renderError(document.getElementById("projects-root"), "Projects failed to load.");
+  }
 }
 
 async function loadSkills() {
-  const module = await import("skills/SkillsGrid");
-  const { renderSkillsGrid } = module;
-  const el = document.getElementById("skills-root");
-  if (el) renderSkillsGrid(el);
+  try {
+    const module = await import("skills/SkillsGrid");
+    const { renderSkillGrid } = module;
+    const el = document.getElementById("skills-root");
+    if (el) renderSkillGrid(el);
+  } catch (err) {
+    console.error("Failed to load skills remote:", err);
+    renderError(document.getElementById("skills-root"), "Skills failed to load.");
+  }
 }
 
 async function loadStats() {
-  const module = await import("stats/StatsWidget");
-  const { renderStatsWidget } = module;
-  const el = document.getElementById("stats-root");
-  if (el) renderStatsWidget(el);
+  try {
+    const module = await import("stats/StatsWidget");
+    const { renderStatsWidget } = module;
+    const el = document.getElementById("stats-root");
+    if (el) renderStatsWidget(el);
+  } catch (err) {
+    console.error("Failed to load stats remote:", err);
+    renderError(document.getElementById("stats-root"), "Stats failed to load.");
+  }
 }
-
-
 
 function renderApp() {
   const main = document.getElementById("app-main");
+  if (!main) return;
+
   main.innerHTML = `
-    <div id="stats-widget"></div>
-    <div id="projects-grid"></div>
-    <div id="activity-widget"></div>
-    <div id="skills-grid"></div>
+    <div id="stats-root"></div>
+    <div id="projects-root"></div>
+    <div id="activity-root"></div>
+    <div id="skills-root"></div>
   `;
 
   loadStats();
